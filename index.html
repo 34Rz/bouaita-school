@@ -1,97 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>نظام إدارة المدرسة</title>
-<style>
-:root{--green:#176b45;--green2:#218b5b;--bg:#f5f7f8;--card:#fff;--text:#243238;--muted:#7b878d;--line:#e8edef;--gold:#d5a62a;--red:#e45b5b;--blue:#3d8fd8}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:"Tahoma","Arial",sans-serif;color:var(--text)}
-button,input,select{font:inherit}.app{display:flex;min-height:100vh}.sidebar{width:255px;background:linear-gradient(180deg,#12653f,#0e5a38);color:#fff;padding:18px 13px;position:fixed;right:0;top:0;bottom:0;overflow:auto}
-.brand{display:flex;align-items:center;gap:10px;padding:6px 8px 20px;border-bottom:1px solid #ffffff20}.logo{width:46px;height:46px;border-radius:50%;background:#fff;color:var(--green);display:grid;place-items:center;font-weight:800;font-size:20px}.brand b{font-size:15px}.brand small{display:block;opacity:.7;margin-top:3px}
-.menu{margin-top:14px}.menu a{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;padding:11px 12px;border-radius:9px;margin:4px 0;font-size:14px}.menu a:hover,.menu a.active{background:#ffffff18}.ico{width:23px;text-align:center;opacity:.95}
-.main{margin-right:255px;width:calc(100% - 255px);padding:18px 25px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.top h1{font-size:20px;margin:0}.top .user{display:flex;gap:10px;align-items:center}.avatar{width:38px;height:38px;border-radius:50%;background:#e7f3ed;color:var(--green);display:grid;place-items:center;font-weight:bold}
-.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}.stat{background:var(--card);border-radius:10px;padding:17px;box-shadow:0 2px 8px #2632380b;border-top:4px solid var(--green)}.stat.red{border-color:var(--red)}.stat.gold{border-color:var(--gold)}.stat.blue{border-color:var(--blue)}.stat h3{margin:0;color:var(--muted);font-size:12px;font-weight:500}.stat strong{display:block;font-size:27px;margin-top:9px}.layout{display:grid;grid-template-columns:1.35fr 1fr;gap:15px;margin-top:15px}.card{background:#fff;border-radius:10px;padding:18px;box-shadow:0 2px 8px #2632380b}.card h2{font-size:15px;margin:0 0 14px}.chart{height:220px;position:relative;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:repeating-linear-gradient(to bottom,transparent 0,transparent 43px,#eef1f2 44px)}.bars{height:100%;display:flex;align-items:flex-end;justify-content:space-around;padding:15px 12px 0}.bar{width:11%;background:var(--green2);border-radius:5px 5px 0 0;position:relative}.bar i{position:absolute;bottom:-22px;right:0;left:0;text-align:center;font-style:normal;font-size:10px;color:var(--muted)}
-.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{padding:11px 8px;border-bottom:1px solid var(--line);text-align:right}.table th{color:var(--muted);font-weight:500}.badge{padding:4px 8px;border-radius:20px;font-size:10px;background:#eaf6ef;color:#187044}.badge.red{background:#fff0f0;color:#c94c4c}.badge.blue{background:#edf6ff;color:#3178b7}.actions{display:flex;gap:7px}.btn{border:0;background:var(--green);color:#fff;border-radius:7px;padding:8px 13px;cursor:pointer}.btn.secondary{background:#eef3f1;color:var(--green)}.btn.danger{background:#fff0f0;color:#c94c4c}
-.page{display:none}.page.active{display:block}.toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:14px}.search{border:1px solid var(--line);background:#fff;border-radius:8px;padding:9px 12px;width:270px;outline:none}.empty{padding:45px;text-align:center;color:var(--muted)}
-.modal{display:none;position:fixed;inset:0;background:#0006;align-items:center;justify-content:center;z-index:20}.modal.show{display:flex}.modalbox{background:#fff;width:min(500px,92vw);border-radius:12px;padding:20px}.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form label{font-size:12px;color:var(--muted)}.form input,.form select{width:100%;margin-top:5px;border:1px solid var(--line);border-radius:7px;padding:9px}.full{grid-column:1/-1}
-@media(max-width:1050px){.grid{grid-template-columns:repeat(3,1fr)}.layout{grid-template-columns:1fr}.sidebar{width:215px}.main{margin-right:215px;width:calc(100% - 215px)}}
-@media(max-width:720px){.sidebar{position:static;width:100%;height:auto}.app{display:block}.main{margin:0;width:100%;padding:12px}.grid{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}.top{margin-top:4px}.menu{display:grid;grid-template-columns:repeat(2,1fr)}.search{width:100%}.toolbar{flex-direction:column;align-items:stretch}}
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مدرسة النور القرآنية - لوحة التحكم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script src="chart.umd.min.js"></script>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
 <div class="app">
-<aside class="sidebar">
-  <div class="brand"><div class="logo">م</div><div><b>مدرسة النجاح</b><small>نظام الإدارة المدرسية</small></div></div>
-  <nav class="menu">
-    <a href="#" class="active" data-page="dashboard"><span class="ico">⌂</span>لوحة التحكم</a>
-    <a href="#" data-page="students"><span class="ico">👨‍🎓</span>الطلاب</a>
-    <a href="#" data-page="teachers"><span class="ico">👨‍🏫</span>الأساتذة</a>
-    <a href="#" data-page="classes"><span class="ico">🏫</span>الأقسام</a>
-    <a href="#" data-page="attendance"><span class="ico">✓</span>الحضور والغياب</a>
-    <a href="#" data-page="grades"><span class="ico">★</span>النقط والنتائج</a>
-    <a href="#" data-page="schedule"><span class="ico">▦</span>الجدول الدراسي</a>
-    <a href="#" data-page="announcements"><span class="ico">🔔</span>الإعلانات</a>
-    <a href="#" data-page="settings"><span class="ico">⚙</span>الإعدادات</a>
-  </nav>
-</aside>
 
-<main class="main">
-<header class="top"><div><h1 id="title">لوحة التحكم</h1><small style="color:var(--muted)">مرحباً بك في نظام إدارة المدرسة</small></div><div class="user"><span>الإدارة</span><div class="avatar">م</div></div></header>
+  <!-- ===================== الشريط الجانبي ===================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">📖</div>
+    <div class="school-name">مدرسة النور القرآنية</div>
+    <nav id="nav">
+      <a data-page="dashboard" class="active"><span>لوحة التحكم</span><span class="ic">🧭</span></a>
+      <a data-page="students"><span>إدارة الطلاب</span><span class="ic">🎓</span></a>
+      <a data-page="halaqat"><span>الحلقات والمستويات</span><span class="ic">👥</span></a>
+      <a data-page="memorization"><span>تتبع الحفظ</span><span class="ic">📗</span></a>
+      <a data-page="quranmap"><span>خريطة القرآن</span><span class="ic">🕌</span></a>
+      <a data-page="attendance"><span>الحضور والغياب</span><span class="ic">📋</span></a>
+      <a data-page="payments"><span>الأداءات والاشتراكات</span><span class="ic">📷</span></a>
+      <a data-page="notes"><span>الملاحظات والتقييم</span><span class="ic">📝</span></a>
+      <a data-page="users"><span>إدارة المستخدمين</span><span class="ic">👤</span></a>
+      <a data-page="announcements"><span>الإعلانات والتواصل</span><span class="ic">📢</span></a>
+      <a data-page="reports"><span>التقارير والإحصائيات</span><span class="ic">📊</span></a>
+      <a data-page="settings"><span>الإعدادات</span><span class="ic">⚙️</span></a>
+    </nav>
+  </aside>
 
-<section id="dashboard" class="page active">
-<div class="grid">
- <div class="stat"><h3>إجمالي الطلاب</h3><strong>420</strong></div>
- <div class="stat red"><h3>الحاضرون اليوم</h3><strong>398</strong></div>
- <div class="stat gold"><h3>نسبة الحضور</h3><strong>94%</strong></div>
- <div class="stat blue"><h3>الأساتذة</h3><strong>32</strong></div>
- <div class="stat"><h3>الأقسام</h3><strong>18</strong></div>
-</div>
-<div class="layout">
- <div class="card"><h2>نسبة الحضور خلال الأسبوع</h2><div class="chart"><div class="bars">
-  <div class="bar" style="height:76%"><i>الإثنين</i></div><div class="bar" style="height:84%"><i>الثلاثاء</i></div><div class="bar" style="height:79%"><i>الأربعاء</i></div><div class="bar" style="height:91%"><i>الخميس</i></div><div class="bar" style="height:94%"><i>الجمعة</i></div><div class="bar" style="height:88%"><i>السبت</i></div>
- </div></div></div>
- <div class="card"><h2>آخر المسجلين</h2><table class="table"><thead><tr><th>الاسم</th><th>القسم</th><th>الحالة</th></tr></thead><tbody>
- <tr><td>محمد أمين</td><td>الثالثة إعدادي</td><td><span class="badge">نشط</span></td></tr>
- <tr><td>عبد الرحمن</td><td>الأولى إعدادي</td><td><span class="badge">نشط</span></td></tr>
- <tr><td>يوسف أحمد</td><td>الثانية إعدادي</td><td><span class="badge blue">جديد</span></td></tr>
- <tr><td>إبراهيم</td><td>الثالثة إعدادي</td><td><span class="badge">نشط</span></td></tr>
- </tbody></table></div>
-</div>
-<div class="card" style="margin-top:15px"><h2>تنبيهات الإدارة</h2><p style="margin:8px 0;color:var(--muted);font-size:13px">هناك 7 حالات غياب تحتاج إلى مراجعة، و3 إعلانات جديدة لم يتم نشرها بعد.</p></div>
-</section>
+  <!-- ===================== المحتوى ===================== -->
+  <div class="main">
+    <div class="topbar">
+      <button class="btn-logout">🚪 خروج</button>
+      <div style="display:flex;align-items:center;gap:18px;">
+        <div class="user">👤 المدير</div>
+        <span class="burger" id="burger">☰</span>
+      </div>
+    </div>
+    <div class="content" id="content"></div>
+  </div>
 
-<section id="students" class="page">
-<div class="toolbar"><input class="search" placeholder="ابحث عن طالب..." oninput="filterTable(this,'studentsTable')"><button class="btn" onclick="openModal('إضافة طالب')">+ إضافة طالب</button></div>
-<div class="card"><table class="table" id="studentsTable"><thead><tr><th>رقم</th><th>الاسم</th><th>القسم</th><th>الهاتف</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody>
-<tr><td>001</td><td>محمد أمين</td><td>3 إعدادي</td><td>06xxxxxxxx</td><td><span class="badge">نشط</span></td><td class="actions"><button class="btn secondary">عرض</button><button class="btn danger">حذف</button></td></tr>
-<tr><td>002</td><td>عبد الرحمن</td><td>1 إعدادي</td><td>06xxxxxxxx</td><td><span class="badge">نشط</span></td><td class="actions"><button class="btn secondary">عرض</button><button class="btn danger">حذف</button></td></tr>
-<tr><td>003</td><td>يوسف أحمد</td><td>2 إعدادي</td><td>06xxxxxxxx</td><td><span class="badge blue">جديد</span></td><td class="actions"><button class="btn secondary">عرض</button><button class="btn danger">حذف</button></td></tr>
-</tbody></table></div></section>
-
-<section id="teachers" class="page"><div class="toolbar"><div></div><button class="btn" onclick="openModal('إضافة أستاذ')">+ إضافة أستاذ</button></div><div class="card"><table class="table"><thead><tr><th>الاسم</th><th>المادة</th><th>الهاتف</th><th>الأقسام</th><th>الحالة</th></tr></thead><tbody>
-<tr><td>أ. أحمد</td><td>الرياضيات</td><td>06xxxxxxxx</td><td>1، 2، 3 إعدادي</td><td><span class="badge">نشط</span></td></tr><tr><td>أ. محمد</td><td>اللغة العربية</td><td>06xxxxxxxx</td><td>1، 2 إعدادي</td><td><span class="badge">نشط</span></td></tr></tbody></table></div></section>
-
-<section id="classes" class="page"><div class="grid"><div class="stat"><h3>الأولى إعدادي</h3><strong>7</strong></div><div class="stat"><h3>الثانية إعدادي</h3><strong>6</strong></div><div class="stat"><h3>الثالثة إعدادي</h3><strong>5</strong></div></div><div class="card" style="margin-top:15px"><h2>الأقسام</h2><table class="table"><tr><th>القسم</th><th>عدد الطلاب</th><th>الأستاذ الرئيسي</th><th>القاعة</th></tr><tr><td>الثالثة إعدادي A</td><td>24</td><td>أ. أحمد</td><td>قاعة 3</td></tr><tr><td>الثانية إعدادي A</td><td>26</td><td>أ. محمد</td><td>قاعة 2</td></tr></table></div></section>
-
-<section id="attendance" class="page"><div class="card"><h2>الحضور والغياب — اليوم</h2><div style="display:flex;gap:10px;margin-bottom:15px"><button class="btn">✓ تسجيل الحضور</button><button class="btn secondary">تصدير التقرير</button></div><table class="table"><tr><th>الطالب</th><th>القسم</th><th>الحالة</th><th>ملاحظة</th></tr><tr><td>محمد أمين</td><td>3 إعدادي A</td><td><span class="badge">حاضر</span></td><td>—</td></tr><tr><td>عبد الرحمن</td><td>1 إعدادي A</td><td><span class="badge red">غائب</span></td><td>بدون عذر</td></tr></table></div></section>
-
-<section id="grades" class="page"><div class="card"><h2>النقط والنتائج</h2><p style="color:var(--muted);font-size:13px">يمكن لاحقاً ربط هذه الصفحة بملفات Google Sheets أو قاعدة بيانات لإدخال النقط وحساب المعدلات تلقائياً.</p><table class="table"><tr><th>الطالب</th><th>العربية</th><th>الرياضيات</th><th>العلوم</th><th>المعدل</th></tr><tr><td>محمد أمين</td><td>17</td><td>15</td><td>16</td><td><b>16</b></td></tr><tr><td>عبد الرحمن</td><td>15</td><td>13</td><td>14</td><td><b>14</b></td></tr></table></div></section>
-
-<section id="schedule" class="page"><div class="card"><h2>الجدول الدراسي</h2><table class="table"><tr><th>الوقت</th><th>الإثنين</th><th>الثلاثاء</th><th>الأربعاء</th><th>الخميس</th><th>الجمعة</th></tr><tr><td>08:00</td><td>رياضيات</td><td>عربية</td><td>علوم</td><td>رياضيات</td><td>تربية إسلامية</td></tr><tr><td>10:00</td><td>عربية</td><td>علوم</td><td>رياضيات</td><td>فرنسية</td><td>نشاط</td></tr><tr><td>14:00</td><td>علوم</td><td>رياضيات</td><td>عربية</td><td>تاريخ</td><td>مراجعة</td></tr></table></div></section>
-
-<section id="announcements" class="page"><div class="toolbar"><div></div><button class="btn" onclick="openModal('إضافة إعلان')">+ إعلان جديد</button></div><div class="card"><h2>الإعلانات</h2><div style="padding:14px;border-bottom:1px solid var(--line)"><b>اجتماع أولياء الأمور</b><p style="color:var(--muted);font-size:12px">يوم السبت على الساعة 10:00 صباحاً.</p></div><div style="padding:14px"><b>بداية الاختبارات</b><p style="color:var(--muted);font-size:12px">تبدأ الاختبارات الأسبوع المقبل.</p></div></div></section>
-
-<section id="settings" class="page"><div class="card"><h2>إعدادات المدرسة</h2><div class="form"><label>اسم المدرسة<input value="مدرسة النجاح"></label><label>السنة الدراسية<select><option>2026 / 2027</option><option>2025 / 2026</option></select></label><label>البريد الإلكتروني<input value="school@example.com"></label><label>رقم الهاتف<input value="06xxxxxxxx"></label><label class="full">وصف المدرسة<input value="مؤسسة تعليمية تهتم بالتعليم والتربية"></label></div><button class="btn" style="margin-top:15px" onclick="alert('تم حفظ الإعدادات محلياً')">حفظ التغييرات</button></div></section>
-</main>
 </div>
 
-<div class="modal" id="modal"><div class="modalbox"><div style="display:flex;justify-content:space-between;align-items:center"><h2 id="modalTitle" style="margin:0;font-size:17px"></h2><button class="btn secondary" onclick="closeModal()">إغلاق</button></div><div class="form" style="margin-top:18px"><label>الاسم<input placeholder="اكتب الاسم"></label><label>القسم<input placeholder="مثال: 3 إعدادي"></label><label>الهاتف<input placeholder="06xxxxxxxx"></label><label>الحالة<select><option>نشط</option><option>غير نشط</option></select></label></div><button class="btn" style="margin-top:16px" onclick="closeModal();alert('تمت الإضافة في النسخة التجريبية')">حفظ</button></div></div>
-<script>
-const titles={dashboard:"لوحة التحكم",students:"الطلاب",teachers:"الأساتذة",classes:"الأقسام",attendance:"الحضور والغياب",grades:"النقط والنتائج",schedule:"الجدول الدراسي",announcements:"الإعلانات",settings:"الإعدادات"};
-document.querySelectorAll(".menu a").forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelectorAll(".menu a").forEach(x=>x.classList.remove("active"));a.classList.add("active");document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.getElementById(a.dataset.page).classList.add("active");document.getElementById("title").textContent=titles[a.dataset.page];});
-function openModal(t){document.getElementById("modalTitle").textContent=t;document.getElementById("modal").classList.add("show")}
-function closeModal(){document.getElementById("modal").classList.remove("show")}
-function filterTable(inp,id){const q=inp.value.trim().toLowerCase();document.querySelectorAll("#"+id+" tbody tr").forEach(r=>r.style.display=r.innerText.toLowerCase().includes(q)?"":"none")}
-</script>
-</body></html>
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
